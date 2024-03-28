@@ -2,6 +2,8 @@ import os
 
 from flask import Flask
 
+from farms_api.routes.farmers import farmers_blueprint
+
 
 def create_app(test_config=None):
     # create and configure the app
@@ -10,6 +12,8 @@ def create_app(test_config=None):
         SECRET_KEY='dev',
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
     )
+
+    app.register_blueprint(farmers_blueprint, url_prefix='/api')
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -32,6 +36,6 @@ def create_app(test_config=None):
     return app
 
 
-def run_app(port, debug=True):
+def run_app(port=3000, debug=True):
     app = create_app()
     app.run(port=port, debug=debug)
