@@ -2,6 +2,7 @@ import os
 
 from flask import Flask
 
+from farms_api.routes.addresses import addresses_blueprint
 from farms_api.routes.farmers import farmers_blueprint
 
 
@@ -14,6 +15,7 @@ def create_app(test_config=None):
     )
 
     app.register_blueprint(farmers_blueprint, url_prefix='/api')
+    app.register_blueprint(addresses_blueprint, url_prefix='/api')
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
